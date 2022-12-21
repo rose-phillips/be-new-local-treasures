@@ -1,17 +1,20 @@
 const { mongoose, Schema } = require("mongoose");
 
-const huntSchema = new Schema({
-  title: { type: String, required: true },
-  location: { type: String, required: true },
-  checkpoints: {
-    1: { lat: Number, long: Number },
-    2: { lat: Number, long: Number },
-    3: { lat: Number, long: Number },
-    4: { lat: Number, long: Number },
-    5: { lat: Number, long: Number },
+const huntSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    location: { type: String, required: true },
+    checkpoints: {
+      1: { lat: Number, long: Number },
+      2: { lat: Number, long: Number },
+      3: { lat: Number, long: Number },
+      4: { lat: Number, long: Number },
+      5: { lat: Number, long: Number },
+    },
+    distance: { type: Number, required: true },
   },
-  distance: { type: Number, required: true },
-});
+  { timestamps: true }
+);
 
 const Hunt = mongoose.model("hunts", huntSchema);
 
