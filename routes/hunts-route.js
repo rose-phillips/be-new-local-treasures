@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const Hunt = require("../models/Hunt-model");
+const { fetchHunts } = require("../models/hunts-model");
 
-router.get("/", (req, res) => {
-  res.send("hunt route");
+router.get("/", async (req, res, next) => {
+  try {
+    const hunts = await fetchHunts();
+    res.status(200).send({ hunts });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;
