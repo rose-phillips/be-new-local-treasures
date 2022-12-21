@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "startDev": "nodemon app.js",
-    "start": "node listen.js",
+    "start": "node ./db/connection.js",
     "test": "mocha",
     "seed": "node ./db/seed.js"
   },
