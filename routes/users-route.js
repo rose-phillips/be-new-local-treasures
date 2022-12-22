@@ -1,9 +1,14 @@
 const express = require("express");
+const { fetchUsers } = require("../models/users-model");
 const router = express.Router();
-const User = require("../schemas/User-model");
 
-router.get("/", (req, res) => {
-  res.send("user route");
+router.get("/", async (req, res, next) => {
+  try {
+    const users = await fetchUsers();
+    res.status(200).send({ users });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

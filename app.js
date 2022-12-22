@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/api/users", usersRoute);
 app.use("/api/hunts", huntsRoute);
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Local Treasures API");
 });
 
