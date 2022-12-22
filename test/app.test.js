@@ -1,19 +1,34 @@
-const assert = require("assert");
 const expect = require("expect.js");
-const app = require("../app");
 const request = require("supertest");
+const mongoose = require("mongoose");
+require("dotenv/config");
+const app = require("../app");
+
+before(() => {
+  mongoose.set("strictQuery", true);
+  return mongoose.connect(process.env.DATABASE_URL);
+});
+
+after((done) => {
+  return mongoose.connection.close(done);
+});
 
 describe("GET /hunts", () => {
-  it("200: returns all hunts", () => {
-    return request(app)
-      .get("/hunts")
+  it("200: returns all hunts", (done) => {
+    request(app)
+      .get("/api/hunts")
       .expect(200)
       .then((res) => {
-        console.log(res.text);
-        assert(res.text.hunts.length > 0);
-        res.text.hunts.forEach((hunt) => {
+        const fetchedHunts = JSON.parse(res.text).hunts;
+        fetchedHunts.forEach((hunt) => {
           expect(hunt).to.be.an("object");
         });
+      })
+      .catch((err) => {
+        throw err;
+      })
+      .finally(() => {
+        done();
       });
   });
 });
