@@ -9,14 +9,14 @@ const huntsRoute = require("./routes/hunts-route");
 app.use(cors());
 app.use(express.json());
 
-app.use("/users", usersRoute);
-app.use("/hunts", huntsRoute);
+app.use("/api/users", usersRoute);
+app.use("/api/hunts", huntsRoute);
 
 app.get("/", (req, res) => {
-  res.send("here");
+  res.send("Local Treasures API");
 });
 
-app.all("/*", (req, res) => {
+app.all("/api/*", (req, res) => {
   res.status(404).send({ msg: "link not found" });
 });
 
