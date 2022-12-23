@@ -1,8 +1,13 @@
-const expect = require("expect.js");
-const request = require("supertest");
+let chai = require("chai");
 const mongoose = require("mongoose");
 require("dotenv/config");
 const app = require("../app");
+const { describe } = require("mocha");
+const chaiHttp = require("chai-http");
+
+chai.should();
+
+chai.use(chaiHttp);
 
 before(() => {
   mongoose.set("strictQuery", true);
@@ -13,21 +18,26 @@ after((done) => {
   return mongoose.connection.close(done);
 });
 
-describe("GET /hunts", () => {
-  it("200: returns all hunts", (done) => {
-    request(app)
+describe("/GET hunts", () => {
+  it("it should GET all the hunts", (done) => {
+    chai
+      .request(app)
       .get("/api/hunts")
-      .expect(200)
-      .then((res) => {
-        const fetchedHunts = JSON.parse(res.text).hunts;
-        fetchedHunts.forEach((hunt) => {
-          expect(hunt).to.be.an("object");
+      .end((err, res) => {
+        res.should.have.status(200);
+        const fetchedHunts = JSON.parse(res.text);
+        fetchedHunts.should.be.a("object");
+        fetchedHunts.hunts.map((hunt) => {
+          hunt.should.include.keys(
+            "location",
+            "title",
+            "distance",
+            "startPoint",
+            "id"
+          );
+          hunt.should.not.have.property("__v");
         });
-      })
-      .catch((err) => {
-        throw err;
-      })
-      .finally(() => {
+
         done();
       });
   });
