@@ -24,9 +24,11 @@ router.get("/:id", async (req, res, next) => {
   try {
     let huntId = req.params.id
     const hunt = await fetchHuntById(huntId)
-    
-    res.status(200).send({hunt: hunt[0]});
+    if(hunt[0].title) {
+  res.status(200).send({hunt: hunt[0]});
+    } 
   } catch (err) {
+    console.log(err)
     next(err);
   }
 });

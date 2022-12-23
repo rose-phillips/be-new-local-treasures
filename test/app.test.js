@@ -59,13 +59,25 @@ describe("/GET hunt by id", () => {
       });
   });
 
-  it("400 : no such id", (done) => {
+  it("400 : invalid hunt id", (done) => {
     chai
       .request(app)
       .get("/api/hunts/15")
       .end((err, res) => {
         res.should.have.property('statusCode', 400);
-        res.should.have.property('text','{"msg":"no such id"}')
+        res.should.have.property('text','{"msg":"no such hunt"}')
+        done();
+      });
+  });
+
+  it("400 : valid but non-existent hunt id", (done) => {
+    chai
+      .request(app)
+      .get("/api/hunts/123456789012345678901234")
+      .end((err, res) => {
+
+        res.should.have.property('statusCode', 400);
+        res.should.have.property('text','{"msg":"no such hunt"}')
         done();
       });
   });

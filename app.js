@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
 
 app.use((err,req,res,next)=> {
   if(err.code === 'ERR_HTTP_INVALID_STATUS_CODE') {
-    res.status(400).send({msg: 'no such id'})
+    res.status(400).send({msg: 'no such hunt'})
   } else {
     next(err)
   }
