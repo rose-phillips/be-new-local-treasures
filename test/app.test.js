@@ -64,7 +64,6 @@ describe("/GET hunt by id", () => {
       .request(app)
       .get("/api/hunts/15")
       .end((err, res) => {
-        console.log(Object.keys(res), res.statusCode , res.text)
         res.should.have.property('statusCode', 400);
         res.should.have.property('text','{"msg":"no such id"}')
         done();
