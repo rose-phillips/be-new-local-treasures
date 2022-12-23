@@ -42,3 +42,32 @@ describe("/GET hunts", () => {
       });
   });
 });
+
+describe("/GET hunt by id", () => {
+  it("it should GET the hunt by id", (done) => {
+    chai
+      .request(app)
+      .get("/api/hunts/63a2f9a7d6e2c5b09cef8a89")
+      .end((err, res) => {
+        res.should.have.status(200);
+        const fetchedHunt = JSON.parse(res.text);
+        fetchedHunt.hunt.should.be.a("object");
+        fetchedHunt.hunt.should.have.property('title','Heaton Rush')
+        fetchedHunt.hunt.should.have.property('location','Manchester')
+        fetchedHunt.hunt.should.have.property('checkpoints')
+        done();
+      });
+  });
+
+  it("400 : no such id", (done) => {
+    chai
+      .request(app)
+      .get("/api/hunts/15")
+      .end((err, res) => {
+        console.log(Object.keys(res), res.statusCode , res.text)
+        res.should.have.property('statusCode', 400);
+        res.should.have.property('text','{"msg":"no such id"}')
+        done();
+      });
+  });
+});
