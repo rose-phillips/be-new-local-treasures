@@ -20,14 +20,24 @@ app.all("/api/*", (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  if (err.status && err.msg) {
+  if (err) {
     res.status(err.status).send({ msg: err.msg });
   } else {
     next(err);
   }
 });
 
+app.use((err,req,res,next)=> {
+  if(err.code === 'ERR_HTTP_INVALID_STATUS_CODE') {
+    res.status(400).send({msg: 'no such id'})
+  } else {
+    next(err)
+  }
+})
+
+
 app.use((err, req, res, next) => {
+ 
   console.log(err, "unhandled error");
   res.status(500).send({ msg: "Internal Server Error" });
 });

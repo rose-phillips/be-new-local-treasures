@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { fetchHunts } = require("../models/hunts-model");
+const { fetchHunts, fetchHuntById } = require("../models/hunts-model");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -15,6 +15,17 @@ router.get("/", async (req, res, next) => {
       return newHunt;
     });
     res.status(200).send({ hunts: newHunts });
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:id", async (req, res, next) => {
+  try {
+    let huntId = req.params.id
+    const hunt = await fetchHuntById(huntId)
+    
+    res.status(200).send({hunt: hunt[0]});
   } catch (err) {
     next(err);
   }
