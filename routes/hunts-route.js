@@ -4,7 +4,7 @@ const { fetchHunts } = require("../models/hunts-model");
 
 router.get("/", async (req, res, next) => {
   try {
-    const hunts = await fetchHunts();
+    const hunts = fetchHunts();
     res.status(200).send({ hunts });
   } catch (err) {
     next(err);
