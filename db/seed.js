@@ -1,6 +1,6 @@
 const mongoose = require("./connection");
-const User = require("../models/User-model");
-const Hunt = require("../models/Hunt-model");
+const User = require("../schemas/User-model");
+const Hunt = require("../schemas/Hunt-model");
 const huntData = require("./data/hunt-data");
 const userData = require("./data/user-data");
 
