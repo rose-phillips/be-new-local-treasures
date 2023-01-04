@@ -2,10 +2,10 @@ const { mongoose, Schema } = require("mongoose");
 
 const statsSchema = new Schema(
   {
-    hunt: { type: String, required: true },
-    date: {type: Date, required: true},
-    time: {type: Number, required: true},
-    username: {type: String, required: true}
+    hunt: String,
+    date: String,
+    time: Number,
+    username: String,
   },
   { timestamps: true }
 );

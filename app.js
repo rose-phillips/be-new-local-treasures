@@ -4,12 +4,14 @@ const cors = require("cors");
 
 const usersRoute = require("./routes/users-route");
 const huntsRoute = require("./routes/hunts-route");
+const statsRoute = require("./routes/stats-route")
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", usersRoute);
 app.use("/api/hunts", huntsRoute);
+app.use("/api/stats", statsRoute)
 
 app.get("/api", (req, res) => {
   res.send("Local Treasures API");
