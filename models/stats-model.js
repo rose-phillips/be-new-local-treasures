@@ -11,3 +11,4 @@ exports.fetchStatsByHunt = async (title) => {
 exports.createStats = async()=> {
 
 }
+

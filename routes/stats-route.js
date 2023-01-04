@@ -1,5 +1,5 @@
 const express = require("express");
-const { fetchStats, fetchStatsByHunt, createStats } = require("../models/stats-model");
+const { fetchStats, fetchStatsByHunt, createStats, fetchStatsByUser } = require("../models/stats-model");
 const router = express.Router();
 
 
@@ -51,4 +51,6 @@ router.get("/", async (req, res, next) => {
         next(err)
     }
   })
+
+
 module.exports = router

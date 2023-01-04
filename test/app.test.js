@@ -141,3 +141,26 @@ describe("POST new stat for specific hunt", ()=> {
     })
   })
 })
+
+describe('GET stats for specific user', () => {
+  it.only('should return all stats for user', (done) => {
+    chai.request(app)
+    .get("/api/users/ernie/stats")
+    .end((err, res)=> {
+      res.should.have.status(200);
+        const fetchedStats = JSON.parse(res.text);
+        fetchedStats.stats.map((stat) => {
+          stat.should.include.keys(
+            "hunt",
+            "time",
+            "username",
+            "date",
+            "id"
+          );
+          stat.should.have.property("username", "ernie")
+          
+        });
+        done()
+    })
+  });
+});
