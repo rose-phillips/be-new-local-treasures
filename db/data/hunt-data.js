@@ -72,6 +72,29 @@ const huntData = [
     },
     distance: 7,
   },
+  {
+    title: "Toon Trail",
+    location: "Newcastle",
+    checkpoints: {
+      1: { lat: 54.969966, long: -1.616405 },
+      2: { lat: 54.969262, long: -1.611025 },
+      3: { lat: 54.970216, long: -1.600378 },
+      4: { lat: 54.9672, long: -1.604881 },
+      5: { lat: 54.957688, long: -1.628502 },
+    },
+    distance: 5,
+  },
+  {
+    title: "Barrowford Reservoir",
+    location: "Barrowford",
+    checkpoints: {
+      1: { lat: 53.849037, long: -2.204111 },
+      2: { lat: 53.851003, long: -2.203758 },
+      3: { lat: 53.853303, long: -2.20038 },
+      4: { lat: 53.854897, long: -2.20144 },
+    },
+    distance: 4,
+  },
 ];
 
 module.exports = huntData;
@@ -83,4 +106,5 @@ Alley Oop
 Topsy Turvy Trail
 Pinecone Pass 
 Path of the Puppy 
+Toon Trail
 */
